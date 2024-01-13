@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShareShi</title>
+    <link rel="stylesheet" href="css/pico.min.css">
+    <script src="js/htmx.min.js"></script>
+</head>
+<body>
+    <main class="container">
+        <h1>Add a Random URL</h1>
+        <form hx-post="/submit" hx-swap="beforeend" hx-target="#new-link">
+            <input type="text" placeholder="Title" name="title" class="form-control mb-3">
+            <input type="text" placeholder="Url" name="url" class="form-control mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <table>
+            <% if (links.length) { %>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Url</th>
+                    </tr>
+                </thead>
+            <% } %>
+            <tbody id="new-link" hx-target="closest tr" hx-swap="outerHTML swap:0.5s">
+                <% links.forEach(function(link) { %>
+                    <tr>
+                        <td><%= link.title %></td>
+                        <td><%= link.url %></td>
+                        <td>
+                            <button class="btn btn-primary" hx-get="/get-edit-form/<% link.id %>)">Edit Link</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" hx-delete="/delete/<% link.id %>">Delete</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
