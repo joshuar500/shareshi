@@ -30,8 +30,7 @@ app.post("/submit", async (req, res) => {
   await Link.create(link).then((x) => {
     // send id of recently created item
     return res.send(`<tr>
-    <td>${req.body.title}</td>
-    <td>${req.body.url}</td>
+    <td><a href="${req.body.url}">${req.body.title}</a></td>
     <td>
         <button class="btn btn-primary"
             hx-get="/get-edit-form/${x.id}">
@@ -106,8 +105,7 @@ app.put("/update/:id", async (req, res) => {
       })
       .then(() => {
         return res.send(`<tr>
-    <td>${req.body.title}</td>
-    <td>${req.body.url}</td>
+        <td><a href="${req.body.url}">${req.body.title}</a></td>
     <td>
         <button class="btn btn-primary"
             hx-get="/get-edit-form/${id}">
@@ -128,7 +126,7 @@ app.put("/update/:id", async (req, res) => {
 
 
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Service endpoint = http://localhost:${PORT}`);
 });
