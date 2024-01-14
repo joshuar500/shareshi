@@ -14,21 +14,15 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         <table>
-            <% if (links.length) { %>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Url</th>
-                    </tr>
-                </thead>
-            <% } %>
             <tbody id="new-link" hx-target="closest tr" hx-swap="outerHTML swap:0.5s">
                 <% links.forEach(function(link) { %>
                     <tr>
-                        <td><%= link.title %></td>
-                        <td><%= link.url %></td>
                         <td>
-                            <button class="btn btn-primary" hx-get="/get-edit-form/<% link.id %>)">Edit Link</button>
+                            <a href="<%= link.url %>"><%= link.title %></a>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" hx-get="/get-edit-form/<% link.id %>)">Edit
+                                Link</button>
                         </td>
                         <td>
                             <button class="btn btn-primary" hx-delete="/delete/<% link.id %>">Delete</button>
